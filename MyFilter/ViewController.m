@@ -89,6 +89,14 @@
     [photoButton addTarget:self action:@selector(openPhotosLib) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:photoButton];
     
+    UIButton *outButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [outButton setTitle:@"导出" forState:UIControlStateNormal];
+    outButton.frame = CGRectMake(self.view.frame.size.width/2.0f - 50.0f, 500, 100, 30);
+    outButton.backgroundColor = [UIColor redColor];
+    outButton.layer.cornerRadius = 5.0f;
+    [outButton addTarget:self action:@selector(outButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:outButton];
+    
 
 }
 
@@ -123,6 +131,25 @@
     [self presentViewController:self.picker animated:YES completion:nil];
 }
 
+//导出到相册
+- (void)outButton {
+    UIImageWriteToSavedPhotosAlbum(self.filterView.image, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)imageSavedToPhotosAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    NSString *message = @"呵呵";
+    if (!error) {
+        message = @"成功保存到相册";
+    }else
+    {
+        message = [error description];
+    }
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:action];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     [self.picker dismissViewControllerAnimated:YES completion:nil];
