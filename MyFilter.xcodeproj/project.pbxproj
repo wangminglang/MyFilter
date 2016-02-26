@@ -105,7 +105,6 @@
 		BE5A83AD1C7D5CFB00DE9491 /* MyFilter */ = {
 			isa = PBXGroup;
 			children = (
-				BE778F6E1C7E965D00134667 /* bianjitupian.png */,
 				BE5A83B11C7D5CFB00DE9491 /* AppDelegate.h */,
 				BE5A83B21C7D5CFB00DE9491 /* AppDelegate.m */,
 				BE778F6B1C7E94CA00134667 /* ViewController.h */,
@@ -113,9 +112,6 @@
 				BE5A83E11C7D5D3600DE9491 /* ImageUtil.h */,
 				BE5A83E21C7D5D3600DE9491 /* ImageUtil.m */,
 				BE5A83E41C7D9AB600DE9491 /* ColorMatrix.h */,
-				BE5A83BA1C7D5CFB00DE9491 /* Assets.xcassets */,
-				BE5A83BC1C7D5CFB00DE9491 /* LaunchScreen.storyboard */,
-				BE5A83BF1C7D5CFB00DE9491 /* Info.plist */,
 				BE5A83AE1C7D5CFB00DE9491 /* Supporting Files */,
 			);
 			path = MyFilter;
@@ -124,6 +120,10 @@
 		BE5A83AE1C7D5CFB00DE9491 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BE778F6E1C7E965D00134667 /* bianjitupian.png */,
+				BE5A83BA1C7D5CFB00DE9491 /* Assets.xcassets */,
+				BE5A83BC1C7D5CFB00DE9491 /* LaunchScreen.storyboard */,
+				BE5A83BF1C7D5CFB00DE9491 /* Info.plist */,
 				BE5A83AF1C7D5CFB00DE9491 /* main.m */,
 			);
 			name = "Supporting Files";

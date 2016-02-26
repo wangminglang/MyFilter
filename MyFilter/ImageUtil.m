@@ -20,6 +20,7 @@ static CGContextRef CreateRGBABitmapContext (CGImageRef image) {
     
     size_t pixelsWide = CGImageGetWidth(image);//获取横向像素点个数
     size_t pixelsHigh = CGImageGetHeight(image);//获取纵向像素点个数
+    NSLog(@"wide = %zu high = %zu", pixelsWide, pixelsHigh);
     bitmapBytesPerRow = (pixelsWide * 4);//每一行的像素点占用的字节数，每个像素点的RGBA四个通道各占8个bit（0-255）空间
     bitmapByteCount = (bitmapBytesPerRow * pixelsHigh);//整张图占用的字节数
     colorSpace = CGColorSpaceCreateDeviceRGB();//创建依赖于设备的RGB通道
@@ -43,45 +44,12 @@ static unsigned char *RequestImagePixelData(UIImage *image) {
     return data;
 }
 
-static void changeRGBA (int *red, int *green, int *blue, int *alpha, const float *f) {//修改RGB的值
-    int redV = *red;
-    int greenV = *green;
-    int blueV = *blue;
-    int alphaV = *alpha;
-    
-    *red = f[0] * redV + f[1] * greenV + f[2] * blueV + f[3] * alphaV + f[4];
-    *green = f[0+5] * redV + f[1+5] * greenV + f[2+5] * blueV + f[3+5] * alphaV + f[4+5];
-    *blue = f[0+5*2] * redV + f[1+5*2] * greenV + f[2+5*2] * blueV + f[3+5*2] * alphaV + f[4+5*2];
-    *alpha = f[0+5*3] * redV + f[1+5*3] * greenV + f[2+5*3] * blueV + f[3+5*3] * alphaV + f[4+5*3];
-    
-    if (*red > 255) {
-        *red = 255;
-    }
-    if (*red < 0) {
-        *red = 0;
-    }
-    if (*green > 255) {
-        *green = 255;
-    }
-    if (*green < 0) {
-        *green = 0;
-    }
-    if (*blue > 255) {
-        *blue = 255;
-    }
-    if (*blue < 0) {
-        *blue = 0;
-    }
-    if (*alpha > 255) {
-        *alpha = 255;
-    }
-    if (*alpha < 0) {
-        *alpha = 0;
-    }
++ (UIColor *)getPixelColorAtLocation:(CGPoint)point {
+
 }
 
 + (UIImage *)imageWithImage:(UIImage *)image withColorMatrix:(const float *)f {
-    unsigned char *imgPixel =RequestImagePixelData(image);
+    unsigned char *imgPixel = RequestImagePixelData(image);
     CGImageRef inImageRef = [image CGImage];
     GLuint w = CGImageGetWidth(inImageRef);
     GLuint h = CGImageGetHeight(inImageRef);
@@ -127,6 +95,41 @@ static void changeRGBA (int *red, int *green, int *blue, int *alpha, const float
     
 }
 
-
+static void changeRGBA (int *red, int *green, int *blue, int *alpha, const float *f) {//修改RGB的值
+    int redV = *red;
+    int greenV = *green;
+    int blueV = *blue;
+    int alphaV = *alpha;
+    
+    *red = f[0] * redV + f[1] * greenV + f[2] * blueV + f[3] * alphaV + f[4];
+    *green = f[0+5] * redV + f[1+5] * greenV + f[2+5] * blueV + f[3+5] * alphaV + f[4+5];
+    *blue = f[0+5*2] * redV + f[1+5*2] * greenV + f[2+5*2] * blueV + f[3+5*2] * alphaV + f[4+5*2];
+    *alpha = f[0+5*3] * redV + f[1+5*3] * greenV + f[2+5*3] * blueV + f[3+5*3] * alphaV + f[4+5*3];
+    
+    if (*red > 255) {
+        *red = 255;
+    }
+    if (*red < 0) {
+        *red = 0;
+    }
+    if (*green > 255) {
+        *green = 255;
+    }
+    if (*green < 0) {
+        *green = 0;
+    }
+    if (*blue > 255) {
+        *blue = 255;
+    }
+    if (*blue < 0) {
+        *blue = 0;
+    }
+    if (*alpha > 255) {
+        *alpha = 255;
+    }
+    if (*alpha < 0) {
+        *alpha = 0;
+    }
+}
 
 @end

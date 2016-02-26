@@ -27,9 +27,10 @@
 - (UIImageView *)filterView
 {
     if (_filterView == nil) {
-        _filterView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 50.0f, self.view.frame.size.width, 200.0f)];
+        _filterView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, 50.0f, 150.0f, 200.0f)];
         _filterView.userInteractionEnabled = YES;
-        _filterView.contentMode = UIViewContentModeScaleAspectFit;
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick:)];
+        [_filterView addGestureRecognizer:gesture];
     }
     return _filterView;
 }
@@ -54,6 +55,7 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     self.filterView.image = [UIImage imageNamed:@"bianjitupian.png"];
+    self.filterView.backgroundColor = [UIColor greenColor];
     self.originImage = [UIImage imageNamed:@"bianjitupian.png"];
     [self.view addSubview:self.filterView];
     
@@ -98,6 +100,12 @@
     [self.view addSubview:outButton];
     
 
+}
+
+- (void)tapClick:(UITapGestureRecognizer *)gesture {
+    CGPoint point = [gesture locationInView:self.filterView];
+    NSLog(@"x = %f y = %f", point.x, point.y);
+    
 }
 
 #pragma mark - senderAction 按钮点击事件
